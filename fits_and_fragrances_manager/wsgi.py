@@ -1,3 +1,6 @@
+import dotenv
+dotenv.load_dotenv()
+
 """
 WSGI config for fits_and_fragrances_manager project.
 
