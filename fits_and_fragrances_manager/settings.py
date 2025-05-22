@@ -133,22 +133,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'core.User'
 
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_URL = '/static/'
 
-# Activate Django-Heroku.
-django_heroku.settings(locals())
+# Whitenoise middleware setup
+MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 
-DEFAULT_DB_URL = 'sqlite:///db.sqlite3'
-IS_PRODUCTION = os.environ.get('DJANGO_ENV') == 'production'
-
-DATABASES = {
-    'default': dj_database_url.config(
-        default=DEFAULT_DB_URL,
-        conn_max_age=600,
-        ssl_require=IS_PRODUCTION
-    )
-}
-
-  
+# Production database config
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
