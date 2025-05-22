@@ -140,7 +140,15 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 
-# Use dj_database_url for Heroku Postgres
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+DEFAULT_DB_URL = 'sqlite:///db.sqlite3'
+IS_PRODUCTION = os.environ.get('DJANGO_ENV') == 'production'
+
+DATABASES = {
+    'default': dj_database_url.config(
+        default=DEFAULT_DB_URL,
+        conn_max_age=600,
+        ssl_require=IS_PRODUCTION
+    )
+}
 
   

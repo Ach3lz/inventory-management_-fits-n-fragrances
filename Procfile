@@ -1,1 +1,1 @@
-web: gunicorn fits_and_fragrances.wsgi
+web: gunicorn fits_and_fragrances_manager.wsgi

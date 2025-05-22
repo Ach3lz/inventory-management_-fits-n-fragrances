@@ -14,7 +14,7 @@ urlpatterns = [
     path('register/', register_view, name='register'),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
-    
+    path('accounts/login/', login_view, name='login'),
     # Dashboards
     path('owner/', owner_dashboard, name='owner_dashboard'),
     path('shopkeeper/', shopkeeper_dashboard, name='shopkeeper_dashboard'),
