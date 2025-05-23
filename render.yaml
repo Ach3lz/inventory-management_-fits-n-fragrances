@@ -5,7 +5,7 @@ services:
     buildCommand: |
       pip install -r requirements.txt
       python manage.py collectstatic --noinput
-    startCommand: gunicorn fits_and_fragrances_manager.wsgi:application
+    startCommand: cd /opt/render/project/src && gunicorn fits_and_fragrances_manager.wsgi:application --bind 0.0.0.0:$PORT
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: fits_and_fragrances_manager.settings
