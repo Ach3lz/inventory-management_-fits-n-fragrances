@@ -2,12 +2,20 @@ services:
   - type: web
     name: fits-inventory
     env: python
-    buildCommand: pip install -r requirements.txt
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
     startCommand: gunicorn fits_and_fragrances_manager.wsgi:application
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: fits_and_fragrances_manager.settings
       - key: SECRET_KEY
-        value: your-super-secret-key
+        generateValue: true
       - key: DEBUG
         value: false
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: ALLOWED_HOSTS
+        value: .onrender.com
+    healthCheckPath: /admin/
+    autoDeploy: true
